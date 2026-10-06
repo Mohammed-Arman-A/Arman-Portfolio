@@ -23,3 +23,7 @@ The supplied brief describes a design direction, not Arman's employment history,
 - `app.js`: architecture study content, stack explorer, navigation and WebGL scene.
 
 The 3D scene has no third-party runtime dependency. Google Fonts are optional; system fonts provide a fallback. Rendering pauses outside the viewport and in hidden tabs. Mobile uses fewer nodes and a capped pixel ratio. Reduced motion uses a static scene. WebGL failure retains readable content.
+
+## AI focus and interactive lab
+
+The portfolio now focuses on AI engineering, prompt engineering and agent creation. The AI Lab includes a clearly labeled local workflow simulation with three missions and two execution styles, plus a live structured-prompt composer. It does not call a language model or external tools. The hero includes switchable network modes and a CPU-projected animated 3D fallback for devices without WebGL. Professional history is awaiting actual role details.
