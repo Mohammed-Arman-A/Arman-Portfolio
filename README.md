@@ -1,0 +1,25 @@
+# Arman Portfolio
+
+A responsive technical portfolio for Mohammed Arman A, built from the supplied design brief. Includes an interactive native WebGL computational network, architecture case studies, a six-discipline stack explorer, keyboard command palette, responsive navigation, reduced-motion support and accessible native dialogs.
+
+## Run
+
+No build step or package installation is required. Serve the folder:
+
+```sh
+python3 -m http.server 8000
+```
+
+Open http://localhost:8000. Deploy the root folder as a static site on Vercel, Netlify, GitHub Pages or another static host.
+
+## Content honesty
+
+The supplied brief describes a design direction, not Arman's employment history, completed projects, credentials, email or resume. The included project architectures are explicitly marked as illustrative studies. No employer, metrics, certification or professional achievement is fabricated. Replace these studies with verified real projects and add professional details before using this as a finished career portfolio.
+
+## Editing
+
+- `index.html`: identity, section copy, GitHub links and metadata.
+- `styles.css`: design tokens, layouts and responsive styles.
+- `app.js`: architecture study content, stack explorer, navigation and WebGL scene.
+
+The 3D scene has no third-party runtime dependency. Google Fonts are optional; system fonts provide a fallback. Rendering pauses outside the viewport and in hidden tabs. Mobile uses fewer nodes and a capped pixel ratio. Reduced motion uses a static scene. WebGL failure retains readable content.
