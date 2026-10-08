@@ -47,3 +47,7 @@ The active website now uses `immersive.js`, built from `immersive-source.js` wit
 `cinema.js` adds a bounded loading entrance (skippable and capped at 1.8 seconds), layered scroll/pointer parallax, staggered visibility reveals, magnetic CTAs and click ripples. All effects respect reduced motion. The thinking section presents intuition, logic and creation. The visual palette now uses bright pearl and lilac surfaces with contrast-tuned purple text. Education and professional records still await supplied details.
 
 Dark is now the default theme. The header theme toggle switches to the optional bright palette and saves the choice locally. Loading, scene motion, parallax, entrance reveals, hover depth and micro-interactions remain available in either theme.
+
+## Profile details and technical polish
+
+Education now lists BCA (data and AI, completed 2025) and MCA at Manipal Academy of Higher Education (AI, cloud and data engineering; ongoing, expected 2027). Experience includes an EY full-stack internship and infrastructure work at DXC Technology from January 2026, including AI core-team agent/bot automation. Credentials remain explicitly self-reported until official documents and titles are confirmed; uploaded documents with a different recipient name are not published. Text is slightly larger, model lighting is cooler and quieter, and pointer hover illumination extends across the viewport.
