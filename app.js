@@ -56,3 +56,7 @@ if(!reduced&&matchMedia('(pointer:fine)').matches)document.querySelectorAll('.ar
  if('IntersectionObserver'in window){const chapters=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)document.querySelectorAll('.chapter-nav a').forEach(a=>a.setAttribute('aria-current',String(a.getAttribute('href')==='#'+e.target.id)))}),{rootMargin:'-20% 0px -45% 0px'});document.querySelectorAll('main section[id]').forEach(el=>chapters.observe(el))}
  if(!reduced&&matchMedia('(hover:hover) and (pointer:fine)').matches)document.querySelectorAll('.depth-card').forEach(card=>{card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(1100px) rotateX(${-y*5}deg) rotateY(${x*7}deg) translateY(-3px)`});card.addEventListener('pointerleave',()=>card.style.transform='')});
 })();
+
+// Keep tablet navigation and keyboard dismissal in sync.
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){$("nav").classList.remove("open");$(".menu").setAttribute("aria-expanded","false")}});
+matchMedia("(min-width:1101px)").addEventListener("change",()=>{$("nav").classList.remove("open");$(".menu").setAttribute("aria-expanded","false")});
