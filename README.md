@@ -1,6 +1,6 @@
 # Arman Portfolio
 
-A responsive technical portfolio for Mohammed Arman A, built from the supplied design brief. Includes an interactive native WebGL computational network, architecture case studies, a six-discipline stack explorer, keyboard command palette, responsive navigation, reduced-motion support and accessible native dialogs.
+A responsive technical portfolio for Mohammed Arman A, built from the supplied design brief. Includes an interactive particle swarm with perspective-projected 3D motion, architecture case studies, a six-discipline stack explorer, keyboard command palette, responsive navigation, reduced-motion support and accessible native dialogs.
 
 ## Run
 
@@ -20,10 +20,10 @@ The supplied brief describes a design direction, not Arman's employment history,
 
 - `index.html`: identity, section copy, GitHub links and metadata.
 - `styles.css`: design tokens, layouts and responsive styles.
-- `app.js`: architecture study content, stack explorer, navigation and WebGL scene.
+- `app.js`: architecture study content, stack explorer, navigation and particle scene.
 
-The 3D scene has no third-party runtime dependency. Google Fonts are optional; system fonts provide a fallback. Rendering pauses outside the viewport and in hidden tabs. Mobile uses fewer nodes and a capped pixel ratio. Reduced motion uses a static scene. WebGL failure retains readable content.
+The 3D scene has no third-party runtime dependency. Google Fonts are optional; system fonts provide a fallback. Rendering pauses outside the viewport and in hidden tabs. Mobile uses fewer nodes and a capped pixel ratio. Reduced motion uses a static scene. A pause control lets visitors stop or resume particle motion.
 
 ## AI focus and interactive lab
 
-The portfolio now focuses on AI engineering, prompt engineering and agent creation. The AI Lab includes a clearly labeled local workflow simulation with three missions and two execution styles, plus a live structured-prompt composer. It does not call a language model or external tools. The hero includes switchable network modes and a CPU-projected animated 3D fallback for devices without WebGL. Professional history is awaiting actual role details.
+The portfolio now focuses on AI engineering, prompt engineering and agent creation. The AI Lab includes a clearly labeled local workflow simulation with three missions and two execution styles, plus a live structured-prompt composer. It does not call a language model or external tools. The hero includes switchable swarm, agent and reasoning modes, with a dependency-free Canvas renderer inspired by a binary supernova particle scene. Professional history is awaiting actual role details.
