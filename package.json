@@ -1,0 +1,15 @@
+{
+  "name": "arman-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build:effects": "esbuild atmosphere-entry.jsx --bundle --minify --define:process.env.NODE_ENV=\\\"production\\\" --outfile=atmosphere.js"
+  },
+  "dependencies": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}
