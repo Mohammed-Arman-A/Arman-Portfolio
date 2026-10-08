@@ -3,11 +3,13 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build:effects": "esbuild atmosphere-entry.jsx --bundle --minify --define:process.env.NODE_ENV=\\\"production\\\" --outfile=atmosphere.js"
+    "build:effects": "esbuild atmosphere-entry.jsx --bundle --minify --define:process.env.NODE_ENV=\\\"production\\\" --outfile=atmosphere.js",
+    "build:scene": "esbuild immersive-source.js --bundle --minify --outfile=immersive.js"
   },
   "dependencies": {
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "three": "0.186.1"
   },
   "devDependencies": {
     "esbuild": "0.28.2"

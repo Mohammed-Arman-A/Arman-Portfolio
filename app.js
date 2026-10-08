@@ -44,45 +44,6 @@ function compose(){const task=$('#prompt-task').value.trim()||'Describe the task
 // Subtle pointer depth on system studies; no hover-only content.
 if(!reduced&&matchMedia('(pointer:fine)').matches)document.querySelectorAll('.architecture').forEach(card=>{card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(1000px) rotateX(${-y*4}deg) rotateY(${x*4}deg) translateY(-3px)`});card.addEventListener('pointerleave',()=>card.style.transform='')});
 
-// Particle-swarm art direction adapted from the supplied binary-supernova scene.
-// Precomputed seeds and cached glow sprites keep the existing static site lightweight.
-(()=>{
- const wrap=$('.core-wrap'),canvas=$('#core'),fallback=$('.core-fallback');
- const ctx=canvas.getContext('2d',{alpha:true});if(!ctx)return;
- canvas.hidden=false;fallback.hidden=true;canvas.setAttribute('aria-label','Interactive 3D particle swarm with twin luminous cores and expanding signal shells');
- const small=matchMedia('(max-width:760px)').matches,total=small?620:1600;
- let seed=47;const rand=()=>{seed=seed*16807%2147483647;return(seed-1)/2147483646};
- const particles=Array.from({length:total},(_,i)=>{const phi=rand()*Math.PI*2,costh=rand()*2-1,sinth=Math.sqrt(1-costh*costh);return{dx:sinth*Math.cos(phi),dy:costh,dz:sinth*Math.sin(phi),seed:rand(),shell:i%3,index:i};});
- const palette=[[153,197,255],[110,156,232],[198,220,255],[250,184,111],[220,133,75],[255,218,174]];
- const sprites=palette.map(rgb=>{const c=document.createElement('canvas');c.width=c.height=32;const g=c.getContext('2d'),r=g.createRadialGradient(16,16,0,16,16,16);r.addColorStop(0,`rgba(${rgb.join(',')},.9)`);r.addColorStop(.12,`rgba(${rgb.join(',')},.65)`);r.addColorStop(.35,`rgba(${rgb.join(',')},.12)`);r.addColorStop(1,`rgba(${rgb.join(',')},0)`);g.fillStyle=r;g.fillRect(0,0,32,32);return c});
- let w=600,h=530,dpr=1,mode='network',time=9,px=0,py=0,tx=0,ty=0,visible=true,raf=0,last=0,previous=0,paused=reduced;
- const modeButtons=Array.from(document.querySelectorAll('[data-core]'));
- function project(x,y,z){const angle=.35+time*.035+px*.26;const xx=x*Math.cos(angle)+z*Math.sin(angle);let zz=-x*Math.sin(angle)+z*Math.cos(angle);const tilt=.2+py*.24;const yy=y*Math.cos(tilt)-zz*Math.sin(tilt);zz=y*Math.sin(tilt)+zz*Math.cos(tilt);const depth=150/(150-zz),scale=Math.min(w,h)/143;return{x:w*.5+xx*depth*scale,y:h*.49-yy*depth*scale,z:zz,depth};}
- function glowCore(x,y,z,tint){const p=project(x,y,z),size=Math.min(w,h)*.07*(1+Math.sin(time*1.5)*.06);ctx.globalAlpha=.65;ctx.drawImage(sprites[tint],p.x-size,p.y-size,size*2,size*2);ctx.globalAlpha=1;ctx.fillStyle=tint<3?'#deeeff':'#ffe5ba';ctx.beginPath();ctx.arc(p.x,p.y,2.1*p.depth,0,Math.PI*2);ctx.fill();}
- function draw(){ctx.clearRect(0,0,w,h);px+=(tx-px)*.045;py+=(ty-py)*.045;
- const bg=ctx.createRadialGradient(w*.5,h*.5,0,w*.5,h*.5,Math.min(w,h)*.49);bg.addColorStop(0,'rgba(47,81,134,.15)');bg.addColorStop(1,'rgba(47,81,134,0)');ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
- const projected=[];
- for(const p of particles){let x,y,z,r;const angle=time*.14+p.seed*6.28;
- if(mode==='agents'){const group=p.index%2,t=time*.22+group*Math.PI;const cx=Math.cos(t)*19,cz=Math.sin(t)*19;r=5+p.seed*17;x=cx+p.dx*r;y=Math.sin(t*.6)*5+p.dy*r;z=cz+p.dz*r;}
- else if(mode==='reasoning'){const t=p.index/total*Math.PI*12+time*.09;r=21+p.seed*7;x=Math.cos(t)*r;y=(p.index/total-.5)*79;z=Math.sin(t)*r;}
- else{const shellOffset=p.shell*15;const cycle=63+shellOffset;r=(time*2.4+p.seed*cycle+shellOffset)%cycle;const wobble=Math.sin(r*.3+time*.7+p.index*.05)*1.2*(r/70);x=p.dx*r+wobble;y=p.dy*r+wobble*.8;z=p.dz*r+wobble;}
- const screen=project(x,y,z);if(screen.x<0||screen.x>w||screen.y<0||screen.y>h)continue;const warm=p.index%7===0||((mode==='agents')&&p.index%2===1);const tint=warm?3+p.shell:p.shell;const proximity=Math.max(0,1-(r||0)/20),pulse=.5+.5*Math.sin(time*.8-(r||0)*.15+p.shell*2);const size=(p.index%13===0?7:3.7)*screen.depth*(.7+proximity*.65);projected.push({...screen,tint,size,alpha:Math.min(.85,.24+proximity*.5+pulse*.15)});}
- projected.sort((a,b)=>a.z-b.z);ctx.globalCompositeOperation='lighter';for(const p of projected){ctx.globalAlpha=p.alpha;ctx.drawImage(sprites[p.tint],p.x-p.size,p.y-p.size,p.size*2,p.size*2);if(p.size>7){ctx.fillStyle=`rgba(${palette[p.tint].join(',')},.8)`;ctx.beginPath();ctx.moveTo(p.x,p.y-1.7);ctx.lineTo(p.x+1.6,p.y+1.2);ctx.lineTo(p.x-1.6,p.y+1.2);ctx.closePath();ctx.fill();}}
- ctx.globalAlpha=1;const orbit=time*.22;glowCore(Math.cos(orbit)*12,Math.sin(orbit*.6)*3,Math.sin(orbit)*12,0);glowCore(-Math.cos(orbit)*12,-Math.sin(orbit*.6)*3,-Math.sin(orbit)*12,3);
- // Thin orbit paths give the swarm a legible engineering structure.
- ctx.globalCompositeOperation='source-over';ctx.lineWidth=.65;for(let shell=0;shell<2;shell++){ctx.strokeStyle=shell?'rgba(240,170,106,.12)':'rgba(150,193,250,.16)';ctx.beginPath();for(let i=0;i<=90;i++){const a=i/90*Math.PI*2,p=project(Math.cos(a)*(42+shell*13),Math.sin(a)*(13+shell*6),Math.sin(a)*(24-shell*5));i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y)}ctx.stroke();}
- }
- function resize(){const r=wrap.getBoundingClientRect();w=r.width;h=r.height;dpr=Math.min(devicePixelRatio||1,small?1.3:1.6);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);draw()}
- function loop(now){raf=0;if(!visible||document.hidden||paused)return;if(now-last>1000/(small?24:35)){if(previous)time+=Math.min((now-previous)/1000,.06);previous=now;draw();last=now}raf=requestAnimationFrame(loop)}
- function run(){previous=0;if(!raf&&visible&&!document.hidden&&!paused)raf=requestAnimationFrame(loop)}
- modeButtons.forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.core;modeButtons.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));draw()}));
- wrap.addEventListener('pointermove',e=>{const r=wrap.getBoundingClientRect();tx=(e.clientX-r.left)/r.width*2-1;ty=-((e.clientY-r.top)/r.height*2-1);if(paused){px=tx;py=ty;draw()}});wrap.addEventListener('pointerleave',()=>{tx=ty=0;if(paused){px=py=0;draw()}});
- const toggle=document.createElement('button');toggle.className='motion-toggle';toggle.setAttribute('aria-label',paused?'Play particle motion':'Pause particle motion');toggle.textContent=paused?'PLAY / ↗':'PAUSE / Ⅱ';wrap.append(toggle);toggle.addEventListener('click',()=>{paused=!paused;toggle.setAttribute('aria-label',paused?'Play particle motion':'Pause particle motion');toggle.textContent=paused?'PLAY / ↗':'PAUSE / Ⅱ';if(paused&&raf){cancelAnimationFrame(raf);raf=0}else run()});
- if('ResizeObserver'in window)new ResizeObserver(resize).observe(wrap);else addEventListener('resize',resize);
- if('IntersectionObserver'in window)new IntersectionObserver(e=>{visible=e[0].isIntersecting;if(!visible&&raf){cancelAnimationFrame(raf);raf=0}else run()}).observe(wrap);
- document.addEventListener('visibilitychange',()=>{if(document.hidden&&raf){cancelAnimationFrame(raf);raf=0}else run()});resize();run();
-})();
-
 // Cinematic chapter reveals, accessible education tabs and credential views.
 (()=>{
  const education={overview:'Qualifications, institutions and study dates will complete this record.',learning:'Areas of interest: AI engineering, agent systems, prompt design and reliable software.'};

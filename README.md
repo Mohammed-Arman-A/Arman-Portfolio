@@ -37,3 +37,7 @@ The atmosphere now bundles the original supplied React WireTerrain shaders and C
 ## Cinematic portfolio chapters
 
 Dedicated education, certification/badge archive, skills and professional experience sections now use sculptural CSS 3D artwork, pointer depth, scroll reveals and chapter navigation. Education tabs and credential filters support keyboard interaction. Personal education and work records remain explicitly empty until supplied. Rebuild the bundled original effects with `npm install` and `npm run build:effects`; the committed production bundle remains usable without a build step.
+
+## Immersive visual redesign
+
+The active website now uses `immersive.js`, built from `immersive-source.js` with Three.js. It replaces the terrain and sketch styling with illuminated 3D solids, rotating orbital rings, moving satellites and scroll-responsive camera composition. Education and credentials use continuously animated dimensional objects. A shaded perspective Canvas scene provides a non-WebGL fallback. The scene modes and motion control work in both renderers. Rebuild with `npm run build:scene`. Original Originkit files are retained as reference sources and no longer loaded by the active page.
