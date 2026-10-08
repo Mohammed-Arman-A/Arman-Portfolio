@@ -1,5 +1,8 @@
 // Loading transition, layered parallax, staggered entrances and tactile controls.
 (()=>{
+ const themeButton=document.querySelector('.theme-toggle');
+ function themeLabel(){const light=document.documentElement.dataset.theme==='light';themeButton.setAttribute('aria-pressed',String(light));themeButton.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');themeButton.querySelector('span').textContent=light?'☾':'☀';document.querySelector('meta[name="theme-color"]').setAttribute('content',light?'#f5f3ff':'#060711')}
+ themeLabel();themeButton.addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='light'?'dark':'light';document.documentElement.dataset.theme=theme;try{localStorage.setItem('arman-theme',theme)}catch{}themeLabel();document.dispatchEvent(new Event('portfolio-theme-change'))});
  const reducedQuery=matchMedia('(prefers-reduced-motion: reduce)');
  const loader=document.querySelector('.site-loader');let dismissed=false;
  function enter(){if(dismissed)return;dismissed=true;document.documentElement.classList.remove('booting');loader.setAttribute('aria-hidden','true');loader.inert=true;setTimeout(()=>loader.remove(),reducedQuery.matches?0:750)}

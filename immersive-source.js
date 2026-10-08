@@ -8,7 +8,7 @@ function label(){control.textContent=paused?'PLAY MOTION ↗':'PAUSE MOTION Ⅱ'
 let render,resize;
 try{
  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:!small,powerPreference:'low-power'});renderer.setPixelRatio(Math.min(devicePixelRatio||1,small?1.2:1.6));renderer.setClearColor(0x060711,0);
- const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0xebe5ff,.045);const camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.1,100);camera.position.z=10;
+ const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(document.documentElement.dataset.theme==='light'?0xebe5ff:0x060711,.045);document.addEventListener('portfolio-theme-change',()=>{scene.fog.color.setHex(document.documentElement.dataset.theme==='light'?0xebe5ff:0x060711);render?.()});const camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.1,100);camera.position.z=10;
  scene.add(new THREE.AmbientLight(0x8c77ff,1.5));const light=new THREE.PointLight(0xb39cff,100,25);light.position.set(-3,4,5);scene.add(light);const green=new THREE.PointLight(0xc4ff65,70,25);green.position.set(4,-2,4);scene.add(green);
  const group=new THREE.Group();scene.add(group);
  const body=new THREE.Mesh(new THREE.TorusKnotGeometry(1.25,.4,small?100:180,20,2,3),new THREE.MeshStandardMaterial({color:0x7e56ef,metalness:.72,roughness:.2,emissive:0x2a0c62,emissiveIntensity:.5}));group.add(body);
@@ -33,7 +33,7 @@ try{
 }
 function frame(now){raf=0;if(paused||document.hidden)return;if(now-last>1000/(small?24:40)){time+=last?Math.min(.06,(now-last)/1000):0;last=now;px+=(tx-px)*.05;py+=(ty-py)*.05;render()}raf=requestAnimationFrame(frame)}
 function run(){last=0;if(!raf&&!paused&&!document.hidden)raf=requestAnimationFrame(frame)}
-control.addEventListener('click',()=>{paused=!paused;label();cancelAnimationFrame(raf);raf=0;run()});motion.addEventListener('change',e=>{paused=e.matches;label();cancelAnimationFrame(raf);raf=0;render();run()});document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(raf);raf=0;run()});addEventListener('resize',resize);addEventListener('pointermove',e=>{if(e.pointerType==='mouse'&&!motion.matches){tx=e.clientX/innerWidth*2-1;ty=e.clientY/innerHeight*2-1}},{passive:true});
+control.addEventListener('click',()=>{paused=!paused;label();cancelAnimationFrame(raf);raf=0;run()});motion.addEventListener('change',e=>{paused=e.matches;label();cancelAnimationFrame(raf);raf=0;render();run()});document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(raf);raf=0;run()});document.addEventListener('portfolio-theme-change',()=>render());addEventListener('resize',resize);addEventListener('pointermove',e=>{if(e.pointerType==='mouse'&&!motion.matches){tx=e.clientX/innerWidth*2-1;ty=e.clientY/innerHeight*2-1}},{passive:true});
 document.querySelectorAll('[data-core]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.core;document.querySelectorAll('[data-core]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));render()}));
 new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){chapter=e.target.id==='home'?0:1;render()}}),{rootMargin:'-20% 0px -55% 0px'}).observe(document.querySelector('#home'));
 addEventListener('scroll',()=>{chapter=scrollY<innerHeight*.65?0:1;if(paused)render()},{passive:true});resize();run();

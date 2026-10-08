@@ -45,3 +45,5 @@ The active website now uses `immersive.js`, built from `immersive-source.js` wit
 ## Bright cinematic edition
 
 `cinema.js` adds a bounded loading entrance (skippable and capped at 1.8 seconds), layered scroll/pointer parallax, staggered visibility reveals, magnetic CTAs and click ripples. All effects respect reduced motion. The thinking section presents intuition, logic and creation. The visual palette now uses bright pearl and lilac surfaces with contrast-tuned purple text. Education and professional records still await supplied details.
+
+Dark is now the default theme. The header theme toggle switches to the optional bright palette and saves the choice locally. Loading, scene motion, parallax, entrance reveals, hover depth and micro-interactions remain available in either theme.
