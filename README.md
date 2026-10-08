@@ -31,3 +31,5 @@ The portfolio now focuses on AI engineering, prompt engineering and agent creati
 ## Terrain and cursor atmosphere
 
 `atmosphere.js` adapts the supplied Originkit cursor and WireTerrain references into a full-page Canvas terrain with a striped copper sun, pointer steering, a background pause control and a constellation cursor trail. The mesh uses perspective projection and layered noise, with fewer cells on phones. Cursor particles are limited to fine mouse pointers and stop after fading. Both effects respect reduced-motion preferences and pause in hidden tabs.
+
+The atmosphere now bundles the original supplied React WireTerrain shaders and CursorAnimations preset. Only viewport sizing and pointer coordinates are adapted for a fixed background. Original terrain defaults (orange/red, density 120, speed 100, hover 200) and purple constellation cursor are preserved. `WireTerrain.tsx`, `CursorAnimations.tsx` and `atmosphere-entry.jsx` contain editable sources; `atmosphere.js` is the production React bundle. Browsers without WebGL use `atmosphere-fallback.js` for terrain.
