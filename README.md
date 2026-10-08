@@ -41,3 +41,7 @@ Dedicated education, certification/badge archive, skills and professional experi
 ## Immersive visual redesign
 
 The active website now uses `immersive.js`, built from `immersive-source.js` with Three.js. It replaces the terrain and sketch styling with illuminated 3D solids, rotating orbital rings, moving satellites and scroll-responsive camera composition. Education and credentials use continuously animated dimensional objects. A shaded perspective Canvas scene provides a non-WebGL fallback. The scene modes and motion control work in both renderers. Rebuild with `npm run build:scene`. Original Originkit files are retained as reference sources and no longer loaded by the active page.
+
+## Bright cinematic edition
+
+`cinema.js` adds a bounded loading entrance (skippable and capped at 1.8 seconds), layered scroll/pointer parallax, staggered visibility reveals, magnetic CTAs and click ripples. All effects respect reduced motion. The thinking section presents intuition, logic and creation. The visual palette now uses bright pearl and lilac surfaces with contrast-tuned purple text. Education and professional records still await supplied details.
