@@ -27,3 +27,7 @@ The 3D scene has no third-party runtime dependency. Google Fonts are optional; s
 ## AI focus and interactive lab
 
 The portfolio now focuses on AI engineering, prompt engineering and agent creation. The AI Lab includes a clearly labeled local workflow simulation with three missions and two execution styles, plus a live structured-prompt composer. It does not call a language model or external tools. The hero includes switchable swarm, agent and reasoning modes, with a dependency-free Canvas renderer inspired by a binary supernova particle scene. Professional history is awaiting actual role details.
+
+## Terrain and cursor atmosphere
+
+`atmosphere.js` adapts the supplied Originkit cursor and WireTerrain references into a full-page Canvas terrain with a striped copper sun, pointer steering, a background pause control and a constellation cursor trail. The mesh uses perspective projection and layered noise, with fewer cells on phones. Cursor particles are limited to fine mouse pointers and stop after fading. Both effects respect reduced-motion preferences and pause in hidden tabs.
